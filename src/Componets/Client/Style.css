@@ -1,0 +1,30 @@
+/* Стиль для класса "Client" */
+.Client {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Стиль для элементов списка ul */
+  .Client ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Стиль для элементов списка ul */
+  .Client ul li {
+    padding: 8px 0;
+    background-color:blanchedalmond;
+    border-bottom: 1px solid black;
+  }
+  
+  /* Стиль для последнего элемента списка ul */
+  .Client ul li:last-child {
+    border-bottom: none;
+  }
+
+  .Client ul li:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+    border-bottom: none;
+  }
