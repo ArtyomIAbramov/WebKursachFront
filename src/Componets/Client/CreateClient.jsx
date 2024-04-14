@@ -13,8 +13,10 @@ const CreateClient = ({user, addClient }) => {
       phonenumber,
       address,
       passport,
+      carBrand,
       carModel,
-      carCost } = e.target.elements;
+      carCost,
+      carColor } = e.target.elements;
     
     const client = {
         name: name.value,
@@ -24,8 +26,10 @@ const CreateClient = ({user, addClient }) => {
         passport : passport.value,
         cars : [
           {
+            brand : carBrand.value,
             model : carModel.value,
             cost : carCost.value,
+            color : carColor.value
           }
         ],
     };
@@ -71,11 +75,17 @@ return (
     <label>Passport: </label>
     <input type="text" name="passport" placeholder="Enter Passport" required />
     <br />
+    <label>Car brand: </label>
+    <input type="text" name="carBrand" placeholder="Enter Car brand" required />
+    <br />
     <label>Car model: </label>
     <input type="text" name="carModel" placeholder="Enter Car model" required />
     <br />
     <label>Car cost: </label>
     <input type="text" name="carCost" placeholder="Enter Car cost" required />
+    <br />
+    <label>Car color: </label>
+    <input type="text" name="carColor" placeholder="Enter Car color" required />
     <br />
     <button type="submit">Create</button>
     </form>

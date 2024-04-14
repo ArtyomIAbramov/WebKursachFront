@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from 'react';
 import './Style.css'
 
-const url = "api/Client";
+const url = "api/Client/GetClients";
 
     const Client = ({user}) => {
       const [clients, setClients] = useState([]);
-      const [, removeClient] = useState([]);
 
       useEffect(() => {updateClientList();}, []);
 
@@ -20,21 +19,6 @@ const url = "api/Client";
           }
           };
 
-        const deleteItem = async (id) => {
-          const requestOptions = {
-            method: "DELETE",
-          };
-          return await fetch(url +'/' + id,requestOptions)
-          .then((response) => {
-            if (response.ok) {
-                removeClient(id);
-                updateClientList();
-              }
-          },
-          (error) => console.log(error)
-          )
-          }
-
           const updateClientPopups = (client) => {
           const userInput1 = prompt("Введите новое имя:", client.name);
           if (userInput1) {
@@ -42,6 +26,7 @@ const url = "api/Client";
             if (userInput2) {
               client.name = userInput1;
               client.surname = userInput2;
+              client.cars.map(car => car.id = 0);
               updateItem(client);
             } else {
               alert("Отменено или введены некорректные данные");
@@ -59,7 +44,7 @@ const url = "api/Client";
             },
             body: JSON.stringify(updatedClient)
             };
-            return await fetch(url + '/' + updatedClient.id, requestOptions)
+            return await fetch("api/Client/"+ updatedClient.id, requestOptions)
             .then((response) => {
             if (response.ok) {
             updateClientList();
@@ -83,7 +68,6 @@ const url = "api/Client";
                         </li>
                       ))}
                     </ul>
-                  <button onClick={(e) => deleteItem(client.id)}>Удалить</button>
                   <button onClick={(e) => updateClientPopups(client)}>Обновить</button>
                 </div>
                 )

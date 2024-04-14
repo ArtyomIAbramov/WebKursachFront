@@ -12,7 +12,6 @@ import Register from "./Componets/Auto/Register"
 const App = () => {
   const [clients, setClients] = useState([]);
   const addClient = (client) => setClients([...clients, client]);
-  const removeClient = (removeId) => setClients(clients.filter((id) => id !== removeId));
   const [user, setUser] = useState({ isAuthenticated: false, userName: "", userRole: "" })
 
   useEffect(() => {
@@ -54,7 +53,6 @@ const App = () => {
                 <Client
                   clients={clients}
                   setClients={setClients}
-                  removeClient={removeClient}
                   user={user}
                 />
               </>
