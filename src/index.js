@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import Client from "./Componets/Client/Client";
 import CreateClient from "./Componets/Client/CreateClient"
-import Layout from "./Componets/Layout/Layout"
+import LayoutApt from "./Componets/Layout/Layout"
 import LogIn from "./Componets/Auto/Login"
 import LogOff from "./Componets/Auto/Logoff"
 import Register from "./Componets/Auto/Register"
@@ -43,8 +43,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout user={user} />}>
-          <Route index element={<h3>Главная страница</h3>} />
+        <Route path="/" element={<LayoutApt user={user} />}>
           <Route
             path="/clients"
             element={
@@ -58,10 +57,7 @@ const App = () => {
               </>
             }
           />
-          <Route
-            path="/login"
-            element={<LogIn user={user} setUser={setUser} />}
-          />
+          <Route path="/login" element={<LogIn user={user} setUser={setUser} />}/>
           <Route path="/logoff" element={<LogOff setUser={setUser} />} />
           <Route path="/register" element={<Register/>} />
           <Route path="*" element={<h3>404</h3>} />

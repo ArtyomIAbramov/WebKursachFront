@@ -1,51 +1,48 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Form, Input } from "antd";
 
 const LogIn = ({ user, setUser }) => {
-  const [errorMessages, setErrorMessages] = useState([])
-  const navigate = useNavigate()
+  const [errorMessages, setErrorMessages] = useState([]);
+  const navigate = useNavigate();
 
-  const logIn = async (event) => {
-    event.preventDefault()
-
-    var { email, password } = document.forms[0]
-
+  const logIn = async (formValues) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        email: formValues.username,
+        password: formValues.password,
       }),
-    }
+    };
     return await fetch("api/account/login", requestOptions)
       .then((response) => {
         response.status === 200 &&
-          setUser({ isAuthenticated: true, userName: "" })
-        return response.json()
+          setUser({ isAuthenticated: true, userName: "" });
+        return response.json();
       })
       .then(
         (data) => {
-          console.log("Data:", data)
+          console.log("Data:", data);
           if (
             typeof data !== "undefined" &&
             typeof data.userName !== "undefined"
           ) {
-            setUser({ isAuthenticated: true, userName: data.userName })
-            navigate("/")
+            setUser({ isAuthenticated: true, userName: data.userName });
+            navigate("/");
           }
           typeof data !== "undefined" &&
             typeof data.error !== "undefined" &&
-            setErrorMessages(data.error)
+            setErrorMessages(data.error);
         },
         (error) => {
-          console.log(error)
+          console.log(error);
         }
-      )
-  }
+      );
+  };
 
   const renderErrorMessage = () =>
-    errorMessages.map((error, index) => <div key={index}>{error}</div>)
+    errorMessages.map((error, index) => <div key={index}>{error}</div>);
 
   return (
     <>
@@ -54,20 +51,44 @@ const LogIn = ({ user, setUser }) => {
       ) : (
         <>
           <h3>Вход</h3>
-          <form onSubmit={logIn}>
-            <label>Пользователь </label>
-            <input type="text" name="email" placeholder="Логин" />
-            <br />
-            <label>Пароль </label>
-            <input type="text" name="password" placeholder="Пароль" />
-            <br />
-            <button type="submit">Войти</button>
-          </form>
-          {renderErrorMessage()}
+          <Form
+            onFinish={logIn}
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600 }}
+            initialValues={{ remember: true }}
+            onFinishFailed={renderErrorMessage}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LogIn
+export default LogIn;
