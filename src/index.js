@@ -57,7 +57,7 @@ const App = () => {
               </>
             }
           />
-          <Route path="/login" element={<LogIn user={user} setUser={setUser} />}/>
+          <Route path="/login" element={<LogIn setUser={setUser} />}/>
           <Route path="/logoff" element={<LogOff setUser={setUser} />} />
           <Route path="/register" element={<Register/>} />
           <Route path="*" element={<h3>404</h3>} />
