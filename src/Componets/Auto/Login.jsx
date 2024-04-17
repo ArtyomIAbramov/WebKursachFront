@@ -23,14 +23,18 @@ const LogIn = ({ setUser }) => {
       navigate("/")
       }
 
-  const logIn = async (formValues) => {
+  const logIn = async (event) => {
     
+    event.preventDefault()
+
+    var { email, password } = document.forms[0]
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: formValues.username,
-        password: formValues.password,
+        email: email.value,
+        password: password.value,
       }),
     };
 
@@ -67,36 +71,35 @@ const LogIn = ({ setUser }) => {
   const renderErrorMessage = () =>
     errorMessages.map((error, index) => <div key={index}>{error}</div>);
 
-  return (
+return (
 <Modal
-    title="Log In"
+    title="Вход"
     footer={null}
     open = {open}
     onCancel={handleCancel}
     destroyOnClose={true}
   >
     <Form
-      onSubmit={logIn}
       onFinishFailed={renderErrorMessage}
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label="Введите Email"
+        name="email"
+        rules={[{ required: true, message: 'Пожалуйста, введите ваш Email!' }]}
       >
-        <Input />
+        <Input name="inputPassword"/>
       </Form.Item>
       <Form.Item
-        label="Password"
+        label="Введите пароль"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: 'Пожалуйста, введите ваш пароль!' }]}
       >
-        <Input.Password />
+        <Input.Password name="inputPassword" />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" block>
-          Log In
+        <Button type="primary" htmlType="submit" block onClick={logIn}>
+          Войти
         </Button>
       </Form.Item>
     </Form>
