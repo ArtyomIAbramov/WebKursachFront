@@ -57,14 +57,12 @@ const LogIn = ({ setUser }) => {
       <Form
         onFinish={logIn}
         autoComplete="off"
-        initialValues={{ email: "", password: "" }}
       >
         <Form.Item
           label="Введите Email"
           name="email"
           rules={[{ required: true, message: 'Пожалуйста, введите ваш Email!' }]}
           validateStatus={loginError ? "error" : ""}
-          help={loginError ? "Неверный Email или пароль" : ""}
         >
           <Input />
         </Form.Item>
@@ -73,6 +71,7 @@ const LogIn = ({ setUser }) => {
           name="password"
           rules={[{ required: true, message: 'Пожалуйста, введите ваш пароль!' }]}
           validateStatus={loginError ? "error" : ""}
+          help={loginError ? "Неверный Email или пароль" : ""}
         >
           <Input.Password />
         </Form.Item>
