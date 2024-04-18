@@ -28,12 +28,13 @@ const LayoutApt = ({user}) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['2']}
           items={[
             {
               key: '1',
               icon: <LoginOutlined />,
-              label: <Link to="/login">Вход</Link>
+              label: <Link to="/login" >Вход</Link>,
+              //style: {display: "none"}
             },
             {
               key: '2',
@@ -44,23 +45,25 @@ const LayoutApt = ({user}) => {
               key: '3',
               icon: <ContactsOutlined/>,
               label: <Link to="/clients">Клиенты</Link>,
-              style: {display: user.isAuthenticated ? "block" : "none"}
+              style: {display: user.isAuthenticated && user.userRole === "admin" ? "block" : "none"}
             },
             {
               key: '4',
               icon: <TeamOutlined/>,
               label: <Link to="/employee">Работники</Link>,
-              style: {display: user.isAuthenticated ? "block" : "none"}
+              style: {display: user.isAuthenticated && user.userRole === "admin" ? "block" : "none"}
             },
             {
               key: '5',
               icon: <DollarOutlined/>,
-              label: <Link to="/order">Заказы</Link>
+              label: <Link to="/order">Заказы</Link>,
+              style: {display: user.isAuthenticated? "block" : "none"}
             },
             {
               key: '6',
               icon: <LogoutOutlined />,
-              label: <Link to="/logoff">Выход</Link>
+              label: <Link to="/logoff">Выход</Link>,
+              style: {display: user.isAuthenticated ? "block" : "none"}
             },
             {
               key: '7',
@@ -75,8 +78,7 @@ const LayoutApt = ({user}) => {
           style={{
             padding: 0,
             background: colorBgContainer,
-          }}
-        >
+          }}>
           <Button
             type="text"
             icon={collapsed ? <CaretRightOutlined /> : <CaretLeftOutlined />}
@@ -94,8 +96,7 @@ const LayoutApt = ({user}) => {
             padding: 24,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
-          }}
-        >
+          }}>
           <Outlet/>
         </Content>
       </Layout>
