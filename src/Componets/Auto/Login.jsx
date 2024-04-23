@@ -6,7 +6,7 @@ const url = "api/account/login";
 
 const LogIn = ({ setUser }) => {
   const [open, setOpen] = useState(false);
-  const [loginError, setLoginError] = useState(false); 
+  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -53,15 +53,20 @@ const LogIn = ({ setUser }) => {
   };
 
   return (
-    <Modal title="Вход" footer={null} open={open} onCancel={handleCancel} destroyOnClose={true}>
-      <Form
-        onFinish={logIn}
-        autoComplete="off"
-      >
+    <Modal
+      title="Вход"
+      footer={null}
+      open={open}
+      onCancel={handleCancel}
+      destroyOnClose={true}
+    >
+      <Form onFinish={logIn} autoComplete="off">
         <Form.Item
           label="Введите Email"
           name="email"
-          rules={[{ required: true, message: 'Пожалуйста, введите ваш Email!' }]}
+          rules={[
+            { required: true, message: "Пожалуйста, введите ваш Email!" },
+          ]}
           validateStatus={loginError ? "error" : ""}
         >
           <Input />
@@ -69,7 +74,9 @@ const LogIn = ({ setUser }) => {
         <Form.Item
           label="Введите пароль"
           name="password"
-          rules={[{ required: true, message: 'Пожалуйста, введите ваш пароль!' }]}
+          rules={[
+            { required: true, message: "Пожалуйста, введите ваш пароль!" },
+          ]}
           validateStatus={loginError ? "error" : ""}
           help={loginError ? "Неверный Email или пароль" : ""}
         >

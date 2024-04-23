@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
-import './Style.css'
-
+    
 const url = "api/Client/GetClients";
 
     const Client = ({user}) => {
