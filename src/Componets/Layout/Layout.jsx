@@ -28,45 +28,57 @@ const LayoutApt = ({user}) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['8']}
           items={[
             {
               key: '1',
               icon: <LoginOutlined />,
               label: <Link to="/login" >Вход</Link>,
-              //style: {display: "none"}
+              style: {display: user.isAuthenticated ? "none" : "block"},
             },
             {
               key: '2',
               icon: <CarFilled/>,
-              label: <Link to="/cars">Автомобили</Link>
+              label: user.userRole === "admin" ? <Link to="/cars">В наличии</Link> : <Link to="/cars">Автомобили</Link>
             },
             {
               key: '3',
+              icon: <CarFilled/>,
+              style: {display: user.userRole === "admin" ? "block" : "none"},
+              label: <Link to="/allCars">Все автомобили</Link>,
+            },
+            {
+              key: '4',
+              icon: <CarFilled/>,
+              style: {display: user.userRole === "admin" ? "block" : "none"},
+              label: <Link to="/soldCars">Проданные автомобили</Link>
+            },
+            {
+              key: '5',
               icon: <ContactsOutlined/>,
               label: <Link to="/clients">Клиенты</Link>,
               style: {display: user.isAuthenticated && user.userRole === "admin" ? "block" : "none"}
             },
             {
-              key: '4',
+              key: '6',
               icon: <TeamOutlined/>,
               label: <Link to="/employee">Работники</Link>,
               style: {display: user.isAuthenticated && user.userRole === "admin" ? "block" : "none"}
             },
             {
-              key: '5',
+              key: '7',
               icon: <DollarOutlined/>,
               label: <Link to="/order">Заказы</Link>,
               style: {display: user.isAuthenticated? "block" : "none"}
             },
             {
-              key: '6',
+              key: '8',
               icon: <LogoutOutlined />,
               label: <Link to="/logoff">Выход</Link>,
               style: {display: user.isAuthenticated ? "block" : "none"}
             },
             {
-              key: '7',
+              key: '9',
               icon: <FrownOutlined />,
               label: <Link to="/register">Регистрация</Link>
             },

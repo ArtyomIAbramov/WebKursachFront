@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 const url = "api/account/logoff";
 

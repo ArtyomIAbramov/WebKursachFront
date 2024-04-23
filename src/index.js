@@ -8,7 +8,9 @@ import LayoutApt from "./Componets/Layout/Layout"
 import LogIn from "./Componets/Auto/Login"
 import LogOff from "./Componets/Auto/Logoff"
 import Register from "./Componets/Auto/Register"
-import Car from "./Componets/Car/Car"
+import AllAvailableCars from "./Componets/Car/AllAvailableCars"
+import AllCars from "./Componets/Car/AllCars"
+import SoldCars from "./Componets/Car/SoldCars"
 
 const App = () => {
   const [clients, setClients] = useState([]);
@@ -58,7 +60,9 @@ const App = () => {
               </>
             }
           />
-          <Route path="/cars" element={<Car/>}/>
+          <Route path="/cars" element={<AllAvailableCars user={user} />}/>
+          <Route path="/allCars" element={<AllCars/>}/>
+          <Route path="/soldCars" element={<SoldCars/>}/>
           <Route path="/login" element={<LogIn setUser={setUser} />}/>
           <Route path="/logoff" element={<LogOff setUser={setUser} />} />
           <Route path="/register" element={<Register/>} />

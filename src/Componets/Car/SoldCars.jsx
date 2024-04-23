@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'antd';
+import { Card, Alert } from 'antd';
 
-const url = "api/Car/GetAllAvailableCars";
+const url = "api/Car/GetAllSoldCars";
 
-const Car = () => {
+const SoldCars = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {updateCarList();}, []);
@@ -18,10 +18,6 @@ const Car = () => {
     }
     };
 
-  const handleBuyCar = (carId) => {
-    console.log('Купить автомобиль с ID:', carId);
-  };
-
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
       {cars.map(car => (
@@ -31,7 +27,12 @@ const Car = () => {
           style={{ width: 300 }}
           cover={<img alt={car.brand + ' ' + car.model} src={car.url} style={{ width: 280, height: 200, margin: 10}}/>}
           actions={[
-            <Button type="primary" onClick={() => handleBuyCar(car.id)}>Купить</Button>
+            <Alert
+            message="Нет в наличии"
+            type="error"
+            showIcon
+            style={{ backgroundColor: '#f0f0f0', color: 'black', fontFamily: 'Arial, sans-serif', fontSize: '16px' }}
+          />
           ]}
         >
           <p>Цена: {car.cost}</p>
@@ -44,4 +45,4 @@ const Car = () => {
   );
 };
 
-export default Car;
+export default SoldCars;
