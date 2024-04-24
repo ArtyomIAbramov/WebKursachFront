@@ -99,7 +99,7 @@ const Client = () => {
 
       <Select
         defaultValue="api/Client/GetClients"
-        style={{ width: 220, marginLeft: '20px', marginBottom: '20px'}}
+        style={{ width: 220, marginLeft: "20px", marginBottom: "20px" }}
         onChange={handleSelectChange}
       >
         <Option value="api/Client/GetClients">Новые клиенты</Option>

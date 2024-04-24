@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import Client from "./Componets/Client/Client";
+import Employee from "./Componets/Employee/Employee";
 import LayoutApt from "./Componets/Layout/Layout"
 import LogIn from "./Componets/Auto/Login"
 import LogOff from "./Componets/Auto/Logoff"
@@ -48,12 +49,10 @@ const App = () => {
           <Route
             path="/clients"
             element={
-              <>
                 <Client
                   clients={clients}
                   setClients={setClients}
                 />
-              </>
             }
           />
           <Route path="/cars" element={<AllAvailableCars user={user} />}/>
@@ -62,6 +61,7 @@ const App = () => {
           <Route path="/login" element={<LogIn setUser={setUser} />}/>
           <Route path="/logoff" element={<LogOff setUser={setUser} />} />
           <Route path="/register" element={<Register/>} />
+          <Route path="/employee" element={<Employee/>} />
           <Route path="*" element={<h3>404</h3>} />
         </Route>
       </Routes>
