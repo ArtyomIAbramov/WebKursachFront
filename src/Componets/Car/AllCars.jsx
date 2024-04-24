@@ -39,11 +39,11 @@ const AllCars = () => {
     try {
       const response = await fetch("api/Car/" + car.id, requestOptions);
       if (!response.ok) {
-        console.log("Error deleting client");
+        console.log("Error deleting car");
       }
       updateCarList();
     } catch (error) {
-      console.log("Error deleting client");
+      console.log("Error deleting car");
     }
   };
 
@@ -130,7 +130,7 @@ const AllCars = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={() => setCreateModalVisible(true)}>
+      <Button type="primary" onClick={() => setCreateModalVisible(true)} style={{ marginBottom: '20px'}}>
         Создать новый автомобиль
       </Button>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>

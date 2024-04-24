@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import Client from "./Componets/Client/Client";
-import CreateClient from "./Componets/Client/CreateClient"
 import LayoutApt from "./Componets/Layout/Layout"
 import LogIn from "./Componets/Auto/Login"
 import LogOff from "./Componets/Auto/Logoff"
@@ -14,7 +13,6 @@ import SoldCars from "./Componets/Car/SoldCars"
 
 const App = () => {
   const [clients, setClients] = useState([]);
-  const addClient = (client) => setClients([...clients, client]);
   const [user, setUser] = useState({ isAuthenticated: false, userName: "", userRole: "" })
 
   useEffect(() => {
@@ -51,11 +49,9 @@ const App = () => {
             path="/clients"
             element={
               <>
-                <CreateClient user={user} addClient={addClient} />
                 <Client
                   clients={clients}
                   setClients={setClients}
-                  user={user}
                 />
               </>
             }
