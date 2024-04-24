@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import Client from "./Componets/Client/Client";
 import Employee from "./Componets/Employee/Employee";
+import Order from "./Componets/Order/Order";
 import LayoutApt from "./Componets/Layout/Layout"
 import LogIn from "./Componets/Auto/Login"
 import LogOff from "./Componets/Auto/Logoff"
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/logoff" element={<LogOff setUser={setUser} />} />
           <Route path="/register" element={<Register/>} />
           <Route path="/employee" element={<Employee/>} />
+          <Route path="/order" element={<Order/>} />
           <Route path="*" element={<h3>404</h3>} />
         </Route>
       </Routes>

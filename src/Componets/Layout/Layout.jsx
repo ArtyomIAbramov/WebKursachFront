@@ -84,7 +84,7 @@ const LayoutApt = ({ user }) => {
               key: "7",
               icon: <DollarOutlined />,
               label: <Link to="/order">Заказы</Link>,
-              style: { display: user.isAuthenticated ? "block" : "none" },
+              style: { display: user.isAuthenticated && user.userRole === "admin" ? "block" : "none" },
             },
             {
               key: "8",
