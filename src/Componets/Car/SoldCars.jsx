@@ -4,13 +4,13 @@ import { Card, Alert } from "antd";
 const url = "api/Car/GetAllSoldCars";
 
 const SoldCars = () => {
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState([]); //стейт для хранения списка автомобилей
 
   useEffect(() => {
-    updateCarList();
+    updateCarList(); //обновление машин
   }, []);
 
-  const updateCarList = async () => {
+  const updateCarList = async () => { //обновление списка машин
     try {
       const response = await fetch(url);
       const data = await response.json();

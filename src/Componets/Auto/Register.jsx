@@ -5,12 +5,12 @@ import { Button, Form, Input, Modal, Alert } from "antd";
 const url = "api/account/register";
 
 const Register = () => {
-  const [open, setOpen] = useState(false);
-  const [registerFailed, setFailed] = useState(false);
-  const [registerSuccess, setSuccess] = useState(false);
+  const [open, setOpen] = useState(false); //стейт для хранения состояния объекта открытия окна
+  const [registerFailed, setFailed] = useState(false); //стейт для хранения состояния что регистраия провалилась
+  const [registerSuccess, setSuccess] = useState(false);//стейт для хранения состояния что регистраия прошла успешна
   const navigate = useNavigate();
 
-  const showModal = () => {
+  const showModal = () => { //открытие окна
     setOpen(true);
   };
 
@@ -23,7 +23,7 @@ const Register = () => {
     navigate("/");
   };
 
-  const register = async (values) => {
+  const register = async (values) => { //функция регистрации и отпрвки запроса
     var { email, password, passwordConfirm } = values;
 
     const requestOptions = {

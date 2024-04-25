@@ -4,7 +4,7 @@ import { Card, Button, Alert, Modal, Form, Input } from "antd";
 const url = "api/Car/GetAllCars";
 
 const AllCars = () => {
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState([]); //стейт для хранения списка автомобилей
 
   // Состояние для отображения модального окна редактирования
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -25,12 +25,11 @@ const AllCars = () => {
   // Обработчик для подтверждения удаления автомобиля
   const handleDelete = (car) => {
     deleteCar(car);
-    // Закрыть модальное окно удаления
     setDeleteModalVisible(false);
-    // Очистить выбранный автомобиль
     setSelectedCar(null);
   };
 
+  //функция удаления машины через запрос
   const deleteCar = async (car) => {
     const requestOptions = {
       method: "DELETE",
@@ -49,19 +48,19 @@ const AllCars = () => {
 
   // Обработчик для подтверждения редактирования автомобиля
   const handleUpdate = (updCar) => {
+    // переприсваиваем параметры которые неизменяются при редактировании
     updCar.color = selectedCar.color;
     updCar.max_speed = selectedCar.max_speed;
     updCar.power = selectedCar.power;
     updCar.carPosition = selectedCar.carPosition;
     updCar.url = selectedCar.url;
     updCar.id = selectedCar.id;
-    updateCar(updCar);
-    // Закрыть модальное окно редактирования
+    updateCar(updCar); // обновление машины
     setEditModalVisible(false);
-    // Очистить выбранный автомобиль
     setSelectedCar(null);
   };
 
+  //функция обновлнеия машины чкерез запрос
   const updateCar = async (updatedCar) => {
     const requestOptions = {
       method: "PUT",
@@ -80,15 +79,13 @@ const AllCars = () => {
     );
   };
 
-  // Обработчик для подтверждения удаления автомобиля
   const handleCreateNewCar = (car) => {
-    car.carPosition = 1;
+    car.carPosition = 1; //изменение позиции автомоблия на "в магазине"
     createCar(car);
-    // Закрыть модальное окно удаления
     setCreateModalVisible(false);
   };
 
-  const createCar = async (createdCar) => {
+  const createCar = async (createdCar) => { //создание машины с отправкой запроса
     const requestOptions = {
       method: "POST",
       headers: {
@@ -108,17 +105,13 @@ const AllCars = () => {
 
   // Обработчик для закрытия модальных окон
   const handleCancel = () => {
-    // Закрыть модальное окно удаления
     setDeleteModalVisible(false);
-    // Закрыть модальное окно редактирования
     setEditModalVisible(false);
-    // Закрыть модальное окно добавления
     setCreateModalVisible(false);
-    // Очистить выбранный автомобиль
     setSelectedCar(null);
   };
 
-  const updateCarList = async () => {
+  const updateCarList = async () => { //обновление списка машин через запрос
     try {
       const response = await fetch(url);
       const data = await response.json();

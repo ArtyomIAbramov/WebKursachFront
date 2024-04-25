@@ -16,7 +16,7 @@ import { Layout, Menu, Button, theme } from "antd";
 const { Header, Sider, Content } = Layout;
 
 const LayoutApt = ({ user }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false); //стейт хранения развернутый слайдер или нет
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -28,7 +28,7 @@ const LayoutApt = ({ user }) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["8"]}
+          defaultSelectedKeys={["2"]}
           items={[
             {
               key: "1",

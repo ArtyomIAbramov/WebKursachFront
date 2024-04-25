@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Button, Modal, Form, Input } from "antd";
 
 const Employee = () => {
-  const [employees, setEmployee] = useState([]);
+  const [employees, setEmployee] = useState([]); //стейт для хранения списка работников
 
   const [editModalVisible, setEditModalVisible] = useState(false);
 
@@ -10,13 +10,14 @@ const Employee = () => {
 
   const [createModalVisible, setCreateModalVisible] = useState(false);
 
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState(null); ////стейт для хранения выбранного работника
 
   useEffect(() => {
     updateEmployeeList();
   }, []);
 
   const handleUpdate = (updEmployee) => {
+    // переприсваиваем параметры которые неизменяются при редактировании
     updEmployee.emppassport = selectedEmployee.emppassport;
     updEmployee.empaddress = selectedEmployee.empaddress;
     updEmployee.soldCars = selectedEmployee.soldCars;
@@ -25,12 +26,12 @@ const Employee = () => {
     updEmployee.employeePosition = selectedEmployee.employeePosition;
     updEmployee.id = selectedEmployee.id;
 
-    updateEmployee(updEmployee);
+    updateEmployee(updEmployee); //обновление работника
     setEditModalVisible(false);
     setSelectedEmployee(null);
   };
 
-  const updateEmployee = async (updatedEmployee) => {
+  const updateEmployee = async (updatedEmployee) => {  //обновление работника через запрос
     const requestOptions = {
       method: "PUT",
       headers: {
@@ -51,14 +52,14 @@ const Employee = () => {
     );
   };
 
-  const handleCreateNewEmployee = (employee) => {
-    employee.employeePosition = 0;
-    employee.totalSold = 0;
+  const handleCreateNewEmployee = (employee) => { //создание работника
+    employee.employeePosition = 0; //позиция работника (уволен, действующий)
+    employee.totalSold = 0; //сколько работник продал
     createEmployee(employee);
     setCreateModalVisible(false);
   };
 
-  const createEmployee = async (createdEmployee) => {
+  const createEmployee = async (createdEmployee) => { //создание работника через запрос
     const requestOptions = {
       method: "POST",
       headers: {
@@ -76,20 +77,20 @@ const Employee = () => {
     );
   };
 
-  const handleCancel = () => {
+  const handleCancel = () => { //закрытие модальных окон
     setEditModalVisible(false);
     setCreateModalVisible(false);
     setDeleteModalVisible(false);
     setSelectedEmployee(null);
   };
 
-  const handleDelete = (employee) => {
+  const handleDelete = (employee) => { //увольнение работника
     deleteEmployee(employee);
     setDeleteModalVisible(false);
     setSelectedEmployee(null);
   };
 
-  const deleteEmployee = async (employee) => {
+  const deleteEmployee = async (employee) => { //увольнение работника через запрос удаления
     const requestOptions = {
       method: "DELETE",
     };
@@ -108,7 +109,7 @@ const Employee = () => {
     }
   };
 
-  const updateEmployeeList = async () => {
+  const updateEmployeeList = async () => { //обновление списка работников через запрос
     try {
       const response = await fetch("api/Employee");
       const data = await response.json();

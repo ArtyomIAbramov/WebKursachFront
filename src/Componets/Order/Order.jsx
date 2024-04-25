@@ -4,16 +4,16 @@ import { Card, Button, Select } from "antd";
 const { Option } = Select;
 
 const Order = () => {
-  const [orders, setOrders] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null);
-  const [selectedCar, setSelectedCar] = useState(null);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [orders, setOrders] = useState([]);//стейт для хранения списка заказов
+  const [selectedClient, setSelectedClient] = useState(null); //стейт для хранения выбранного клиента
+  const [selectedCar, setSelectedCar] = useState(null);//стейт для хранения выбранной машины
+  const [selectedEmployee, setSelectedEmployee] = useState(null); //стейт для хранения выбранного работника
 
-  const [cars, setCars] = useState([]);
-  const [clients, setClients] = useState([]);
-  const [employees, setEmployee] = useState([]);
+  const [cars, setCars] = useState([]); //стейт для хранения списка машин
+  const [clients, setClients] = useState([]);//стейт для хранения списка клиентов
+  const [employees, setEmployee] = useState([]);//стейт для хранения списка работников
 
-  const updateCarList = async () => {
+  const updateCarList = async () => { //обновление списка машин
     try {
       const response = await fetch("api/Car/GetAllAvailableCars");
       const data = await response.json();
@@ -23,7 +23,7 @@ const Order = () => {
     }
   };
 
-  const updateEmployeeList = async () => {
+  const updateEmployeeList = async () => { //обновление списка работников
     try {
       const response = await fetch("api/Employee");
       const data = await response.json();
@@ -33,7 +33,7 @@ const Order = () => {
     }
   };
 
-  const updateClientList = async () => {
+  const updateClientList = async () => { //обновление списка клиентов
     try {
       const response = await fetch("api/Client/GetClients");
       const data = await response.json();
@@ -44,12 +44,12 @@ const Order = () => {
   };
 
   useEffect(() => {
-    updateOrdersList();
+    updateOrdersList(); //обновление списка заказов
   }, []);
 
 
-  const handleCreateNewOrder = async () => {
-    if (selectedClient && selectedCar && selectedEmployee) {
+  const handleCreateNewOrder = async () => { // создание заказа
+    if (selectedClient && selectedCar && selectedEmployee) { //если все компоненты выбраны (переменные это айдишники!! объектов), то получаем через гет запросы сами объекты
       var clientfinded;
       var carfinded;
       var employeefinded;
@@ -102,12 +102,12 @@ const Order = () => {
             employee: employeefinded,
             order_price: carfinded.cost,
           };
-          createOrder(order);
+          createOrder(order); //создание заказа
      }
     }
   };
 
-  const createOrder = async (createdOrder) => {
+  const createOrder = async (createdOrder) => {//создание заказа через запрос
     const requestOptions = {
       method: "POST",
       headers: {
@@ -125,7 +125,7 @@ const Order = () => {
     }
   };
 
-  const updateOrdersList = async () => {
+  const updateOrdersList = async () => { //обновление спискка заказов через запрос
     updateCarList();
     updateEmployeeList();
     updateClientList();

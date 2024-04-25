@@ -5,24 +5,24 @@ import { Button, Form, Input, Modal } from "antd";
 const url = "api/account/login";
 
 const LogIn = ({ setUser }) => {
-  const [open, setOpen] = useState(false);
-  const [loginError, setLoginError] = useState(false);
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false); //стейт для хранения состояния объекта открытия окна
+  const [loginError, setLoginError] = useState(false); //стейт для отображения ошибки при входе
+  const navigate = useNavigate(); //навигация
 
-  const showModal = () => {
+  const showModal = () => { //открытие модального окна
     setOpen(true);
   };
 
-  useEffect(() => {
+  useEffect(() => { //это позволяет синхронизироваться с внешней системой.
     showModal();
   }, []);
 
-  const handleCancel = () => {
+  const handleCancel = () => { //отмета входа
     setOpen(false);
     navigate("/");
   };
 
-  const logIn = async (values) => {
+  const logIn = async (values) => { //функция логина
     const { email, password } = values;
 
     const requestOptions = {
@@ -53,7 +53,7 @@ const LogIn = ({ setUser }) => {
   };
 
   return (
-    <Modal
+    <Modal //модальное окно
       title="Вход"
       footer={null}
       open={open}

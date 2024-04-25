@@ -2,38 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Card, Button, Modal, Form, Input, Select } from "antd";
 
 const Client = () => {
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState([]); //стейт для хранения списка клиентов
 
   const [editModalVisible, setEditModalVisible] = useState(false);
 
-  const { Option } = Select;
+  const { Option } = Select; //опция выбора всех клиентов или только новых
 
   const [createModalVisible, setCreateModalVisible] = useState(false);
 
   const [selectedClient, setSelectedClient] = useState(null);
 
-  const [clientType, setClientType] = useState("api/Client/GetClients");
+  const [clientType, setClientType] = useState("api/Client/GetClients"); //стейт типа клиента - новый или нет (будет изменять ссылка запроса для получения всех клиентов)
 
   useEffect(() => {
-    updateClientList(clientType);
+    updateClientList(clientType); //обновление списка по типу
   }, []);
 
-  const handleSelectChange = (value) => {
+  const handleSelectChange = (value) => { //изменение выбора типа клиента
     setClientType(value);
     updateClientList(value);
   };
 
   const handleUpdate = (updClient) => {
+    // переприсваиваем параметры которые неизменяются при редактировании
     updClient.passport = selectedClient.passport;
     updClient.cars = selectedClient.cars;
     updClient.clientPosition = selectedClient.clientPosition;
     updClient.id = selectedClient.id;
-    updateClient(updClient);
+    updateClient(updClient); //изменение клиента
     setEditModalVisible(false);
     setSelectedClient(null);
   };
 
-  const updateClient = async (updatedClient) => {
+  const updateClient = async (updatedClient) => { //обновление клиента через запрос
     const requestOptions = {
       method: "PUT",
       headers: {
@@ -51,13 +52,13 @@ const Client = () => {
     );
   };
 
-  const handleCreateNewClient = (client) => {
-    client.clientPosition = 0;
+  const handleCreateNewClient = (client) => { //создание клиента
+    client.clientPosition = 0; //позиция что клиент новый
     createClient(client);
     setCreateModalVisible(false);
   };
 
-  const createClient = async (createdClient) => {
+  const createClient = async (createdClient) => { //создание клиента через запрос
     const requestOptions = {
       method: "POST",
       headers: {
@@ -75,13 +76,13 @@ const Client = () => {
     );
   };
 
-  const handleCancel = () => {
+  const handleCancel = () => { //закрытие модальных окон
     setEditModalVisible(false);
     setCreateModalVisible(false);
     setSelectedClient(null);
   };
 
-  const updateClientList = async (url) => {
+  const updateClientList = async (url) => { //обновление списка клиентов через запрос
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -91,6 +92,8 @@ const Client = () => {
     }
   };
 
+  // flex-wrap задает многострочную расстановку блоков по главной оси.
+  //gap - зазор между элементами Flex
   return (
     <div>
       <Button type="primary" onClick={() => setCreateModalVisible(true)}>

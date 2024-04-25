@@ -5,10 +5,10 @@ import { Modal } from "antd";
 const url = "api/account/logoff";
 
 const LogOff = ({ setUser }) => {
-  const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false); //стейт для хранения состояния объекта открытия окна
+  const navigate = useNavigate();//навигация
 
-  const showModal = () => {
+  const showModal = () => { //открытие модального окна
     setOpen(true);
   };
 
@@ -16,12 +16,12 @@ const LogOff = ({ setUser }) => {
     showModal();
   }, []);
 
-  const handleCancel = () => {
+  const handleCancel = () => { //отмета входа
     setOpen(false);
     navigate("/");
   };
 
-  const logOff = async () => {
+  const logOff = async () => { //функция выхода из системы
     const requestOptions = {
       method: "POST",
     };
