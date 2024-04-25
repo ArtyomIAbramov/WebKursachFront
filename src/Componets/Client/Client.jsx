@@ -102,8 +102,8 @@ const Client = () => {
         style={{ width: 220, marginLeft: "20px", marginBottom: "20px" }}
         onChange={handleSelectChange}
       >
-        <Option value="api/Client/GetClients">Новые клиенты</Option>
-        <Option value="api/Client/GetAllNewClients">Все клиенты</Option>
+        <Option value="api/Client/GetClients">Все клиенты</Option>
+        <Option value="api/Client/GetAllNewClients">Новые клиенты</Option>
       </Select>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
